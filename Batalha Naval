@@ -1,0 +1,69 @@
+def imprime_tabuleiro(tabuleiro):
+  for linha in tabuleiro:
+    print(linha)
+
+tabuleiro_a = [ 
+[' ',' ',' ',' ', ' '], 
+['b',' ','b','b', ' '], 
+['b',' ',' ',' ', 'b'], 
+[' ',' ',' ',' ', 'b'], 
+[' ','b','b','b', ' '] ]
+
+tabuleiro_b = [ 
+[' ','b','b','b', ' '], 
+[' ',' ',' ',' ', 'b'], 
+['b','b',' ',' ', 'b'], 
+[' ',' ',' ','b', ''], 
+[' ',' ',' ','b', ' '] ]
+
+
+jogador = 'a'
+pontuacao_jogador_a = 0
+pontuacao_jogador_b = 0
+
+def jogo_acabou():
+  if pontuacao_jogador_a == 9:
+    print("Parabéns! Jogador A ganhou!")
+    return True #É verdade que o jogo acabou
+  if pontuacao_jogador_b == 9:
+    print("Parabéns! Jogador B ganhou!")
+    return True #É verdade que o jogo acabou
+  return False
+
+while not jogo_acabou():
+  print("Jogador", jogador, "digite a linha que deseja atacar")
+  linha = int(input())
+  print("Jogador", jogador, "digite a coluna que deseja atacar")
+  coluna = int(input())
+
+  #ATAQUE
+  if jogador == 'A':
+    #Sendo o jogador atual o player A
+    #Ataco o tabuleiro do player B
+    if tabuleiro_b[linha][coluna] == 'b':
+      print("PARABÉNS", jogador, "você acertou um barco!!!")
+      pontuacao_jogador_a = pontuacao_jogador_a + 1
+    tabuleiro_b[linha][coluna] = 'X'
+  else:
+    #Sendo o jogador atual o player B
+    #Ataco o tabuleiro do player A
+    if tabuleiro_b[linha][coluna] == 'b':
+      print("PARABÉNS", jogador, "você acertou um barco!!!")
+      pontuacao_jogador_b = pontuacao_jogador_a + 1
+    tabuleiro_a[linha][coluna] = 'X'
+
+  #Troca o Jogador Atual
+  if jogador == 'A':
+    jogador = 'B'
+  else:
+    jogador = 'A'
+
+  #Imprime o tabuleiro de cada jogador
+  print("==== Jogador A ====")
+  print("Pontuação do Jogador A:", pontuacao_jogador_a)
+  imprime_tabuleiro(tabuleiro_a)
+  print()
+  print()
+  print("==== Jogador B ====")
+  print("Pontuação do Jogador B:", pontuacao_jogador_b)
+  imprime_tabuleiro(tabuleiro_b)
